@@ -5,17 +5,38 @@ body {
 }
 
 header {
-    background: #2c3e50;
+    background: #0f5f3a; /* colour change */
     color: white;
     padding: 20px;
-    text-align: center;
+    
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+nav {
+    margin-left: auto;
 }
 
 nav a {
     color: white;
     margin: 0 10px;
     text-decoration: none;
+    font-weight: 600;
 }
+nav a:hover {
+    text-decoration: underline;
+}
+
+
+.nav-links {
+    margin-left: auto; /* pushes nav to the right */
+    display: flex;
+    align-items: center;
 
 .hero img {
     width: 100%;
@@ -27,7 +48,7 @@ main {
 }
 
 footer {
-    background: #2c3e50;
+    background: #0f5f3a; /* green */
     color: white;
     text-align: center;
     padding: 10px;

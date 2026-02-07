@@ -53,9 +53,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'emerald_table_restaurant.urls'
 
 
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
     {
