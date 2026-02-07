@@ -1,61 +1,122 @@
+/* Make footer stay at bottom even if page has little content */
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+
+    /* Sticky footer layout */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-header {
-    background: #0f5f3a; /* colour change */
+/* HEADER */
+.site-header {
+    background: #0f5f3a; /* green */
     color: white;
-    padding: 20px;
-    
+    padding: 16px 20px;
 }
 
 .header-inner {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 16px;
 }
 
-nav {
-    margin-left: auto;
+.site-title {
+    margin: 0;
+    font-size: 32px;
 }
 
-nav a {
+/* NAV (desktop) */
+.nav-links {
+    margin-left: auto;         /* pushes nav to the right */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-links a {
     color: white;
-    margin: 0 10px;
     text-decoration: none;
     font-weight: 600;
 }
-nav a:hover {
+
+.nav-links a:hover {
     text-decoration: underline;
 }
 
+/* Hamburger button (hidden on desktop) */
+.nav-toggle {
+    display: none;
+    margin-left: auto;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 6px 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-.nav-links {
-    margin-left: auto; /* pushes nav to the right */
-    display: flex;
-    align-items: center;
+/* MAIN */
+.site-main {
+    padding: 20px;
+    flex: 1; /* key: pushes footer down */
+}
 
+/* HERO IMAGE */
 .hero img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
-main {
-    padding: 20px;
-}
-
-footer {
-    background: #0f5f3a; /* green */
+/* FOOTER */
+.site-footer {
+    background: #0f5f3a;
     color: white;
     text-align: center;
     padding: 10px;
 }
 
-footer a {
+.site-footer a {
     color: white;
     margin: 0 5px;
     text-decoration: none;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
+
+/* MOBILE/TABLET */
+@media (max-width: 900px) {
+    .header-inner {
+        flex-wrap: wrap;
+    }
+
+    /* Show hamburger on small screens */
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Hide nav by default on small screens */
+    .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* Show nav when open */
+    .nav-links.open {
+        display: flex;
+    }
 }
