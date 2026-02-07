@@ -48,3 +48,9 @@ body {
     text-decoration: underline;
 }
 
+/* HOME INTRO SECTION */
+.home-intro {
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: left;
+}

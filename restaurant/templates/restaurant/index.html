@@ -5,6 +5,24 @@
 <div class="hero">
     <img src="{% static 'images/hero.jpg' %}" alt="Emerald Table Restaurant">
 </div>
+
+<section class="home-intro">
 <h2>Welcome to Emerald Table Restaurant!</h2>
+
+<p>
+        At Emerald Table, we bring together fresh seasonal ingredients, warm hospitality,
+        and a relaxed fine-dining experience. Whether you're celebrating a special occasion,
+        enjoying a quiet evening, or meeting friends for lunch, our team is here to make your visit unforgettable.
+    </p>
+
+    <p>
+        Explore our menu, and book your table online in seconds.
+        We look forward to welcoming you soon!
+    </p>
+
 <p>Experience fine dining in a cozy atmosphere.</p>
+
+
+ <a class="btn-primary" href="{% url 'booking' %}">Book a Table</a>
+</section>
 {% endblock %}
