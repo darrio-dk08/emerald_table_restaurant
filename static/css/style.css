@@ -54,3 +54,31 @@ body {
     margin: 30px auto;
     text-align: left;
 }
+
+.home-intro h2 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.home-intro p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    color: #222;
+}
+
+/* Nice green button */
+.btn-primary {
+    display: inline-block;
+    background: #0f5f3a;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: #0b4a2c;
+}
