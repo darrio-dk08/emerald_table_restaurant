@@ -88,5 +88,11 @@ Used [PEP8 CI Python Linter](https://pep8ci.herokuapp.com/) (**autopep8** docume
 
 ## Lighthouse 
 
+- desktop 
 
-Used [PEP8 CI Python Linter](https://pep8ci.herokuapp.com/) (**autopep8** document formatting)
+![alt text](<Screenshot 2026-02-08 203930.png>)
+
+
+- mobile 
+
+![alt text](<Screenshot 2026-02-08 204314.png>)
