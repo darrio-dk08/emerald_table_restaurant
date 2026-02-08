@@ -39,7 +39,8 @@ def menu(request):
             category = "Menu"
             title = raw
 
-        entry = {"title": title, "description": item.description, "price": item.price}
+        entry = {"title": title,
+                 "description": item.description, "price": item.price}
 
         if category in category_order:
             grouped.setdefault(category, []).append(entry)
@@ -71,6 +72,8 @@ def menu(request):
         )
 
     return render(request, "restaurant/menu.html", {"menu_sections": sections})
+
+
 def booking(request):
     if request.method == "POST":
         form = BookingForm(request.POST)

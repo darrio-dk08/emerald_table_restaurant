@@ -10,19 +10,43 @@ class BookingForm(forms.ModelForm):
         fields = ["name", "email", "phone", "guests", "date", "time"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Your full name"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Your full name",
+                }
             ),
             "email": forms.EmailInput(
-                attrs={"class": "form-control", "placeholder": "you@example.com"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "you@example.com",
+                }
             ),
             "phone": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "+353 ..."}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "+353 ...",
+                }
             ),
             "guests": forms.NumberInput(
-                attrs={"class": "form-control", "min": 1, "max": 20}
+                attrs={
+                    "class": "form-control",
+                    "min": 1,
+                    "max": 20,
+                }
             ),
-            "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
-            "time": forms.TimeInput(attrs={"class": "form-control", "type": "time", "step": 900}),
+            "date": forms.DateInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "date",
+                }
+            ),
+            "time": forms.TimeInput(
+                attrs={
+                    "class": "form-control",
+                    "type": "time",
+                    "step": 900,
+                }
+            ),
         }
 
     def clean_time(self):
@@ -43,8 +67,7 @@ class BookingForm(forms.ModelForm):
 
         if not (in_lunch or in_dinner):
             raise forms.ValidationError(
-                "Please choose a time within our opening hours: 12:00–15:00 or 17:00–22:00."
+                "Please choose a time within our opening hours: "
+                "12:00–15:00 or 17:00–22:00."
             )
-
         return t
- 

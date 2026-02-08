@@ -11,6 +11,7 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'emerald_table_restaurant.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'emerald_table_restaurant.settings')
 
 application = get_asgi_application()

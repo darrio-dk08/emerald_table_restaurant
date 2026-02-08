@@ -3,6 +3,7 @@
 # Create your models here.
 from django.db import models
 
+
 class MenuItem(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -10,6 +11,7 @@ class MenuItem(models.Model):
 
     def __str__(self):
         return f"{self.name} - €{self.price}"
+
 
 class Booking(models.Model):
     name = models.CharField(max_length=100)
