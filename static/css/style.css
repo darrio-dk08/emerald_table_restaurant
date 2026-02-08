@@ -270,3 +270,8 @@ body {
   filter: brightness(0.95);
   color: #fff;
 }
+
+.map-card{
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+}
