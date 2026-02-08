@@ -1,5 +1,4 @@
 from collections import OrderedDict
-
 from django.shortcuts import render, redirect
 
 from .forms import BookingForm
@@ -11,13 +10,27 @@ def home(request):
 
 
 def menu(request):
-    # The current model doesn't have a "category" field, so we infer it from the
-    # name convention: "Starter - Burrata & Citrus", "Mains - Steak Frites", etc.
     items = MenuItem.objects.all().order_by("name")
 
-    grouped = OrderedDict()
+    category_descriptions = {
+        "Starters": "Light, bright and shareable.",
+        "Starter": "Light, bright and shareable.",
+        "Mains": "Comfort classics with a fresh emerald twist.",
+        "Pasta": "Hand-finished sauces, made to order.",
+        "Desserts": "Sweet endings, not too heavy.",
+        "Drinks": "Seasonal cocktails and crisp classics.",
+        "Menu": "Seasonal favourites, prepared fresh daily.",
+    }
+
+    # Your desired order
+    category_order = ["Starters", "Mains", "Pasta", "Desserts", "Drinks"]
+
+    grouped = {}
+    unknown_categories = {}
+
     for item in items:
         raw = (item.name or "").strip()
+
         if " - " in raw:
             category, title = raw.split(" - ", 1)
             category = category.strip()
@@ -26,17 +39,38 @@ def menu(request):
             category = "Menu"
             title = raw
 
-        grouped.setdefault(category, []).append(
+        entry = {"title": title, "description": item.description, "price": item.price}
+
+        if category in category_order:
+            grouped.setdefault(category, []).append(entry)
+        else:
+            unknown_categories.setdefault(category, []).append(entry)
+
+    # Build ordered sections
+    sections = []
+
+    # First: ordered categories
+    for cat in category_order:
+        if cat in grouped:
+            sections.append(
+                {
+                    "title": cat,
+                    "description": category_descriptions.get(cat, ""),
+                    "items": grouped[cat],
+                }
+            )
+
+    # Then: any unknown categories at the bottom
+    for cat, items_list in unknown_categories.items():
+        sections.append(
             {
-                "title": title,
-                "description": item.description,
-                "price": item.price,
+                "title": cat,
+                "description": category_descriptions.get(cat, ""),
+                "items": items_list,
             }
         )
 
-    return render(request, "restaurant/menu.html", {"grouped_menu": grouped.items()})
-
-
+    return render(request, "restaurant/menu.html", {"menu_sections": sections})
 def booking(request):
     if request.method == "POST":
         form = BookingForm(request.POST)
@@ -45,4 +79,5 @@ def booking(request):
             return redirect("home")
     else:
         form = BookingForm()
+
     return render(request, "restaurant/booking.html", {"form": form})
