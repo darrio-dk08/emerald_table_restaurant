@@ -1,10 +1,39 @@
 {% extends 'restaurant/base.html' %}
 {% block content %}
 
-<h2>Our Menu</h2>
-<ul>
-    {% for item in menu_items %}
-    <li>{{ item.name }} - €{{ item.price }}<br>{{ item.description }}</li>
-    {% endfor %}
-</ul>
+<section class="menu-page">
+     <div class="menu-hero">
+  <div class="menu-header">
+    <h2>Our Menu</h2>
+    <p>Seasonal favourites, prepared fresh daily.</p>
+  </div>
+  </div>
+
+  {% for category, items in grouped_menu %}
+      <div class="menu-section">
+      <div class="menu-section-head">
+        <h3 class="menu-section-title">{{ category }}</h3>
+        <div class="menu-section-rule"></div>
+      </div>
+
+  
+   <div class="menu-grid">
+        {% for item in items %}
+          <article class="menu-card">
+            <div class="menu-card-top">
+              <h4 class="menu-name">{{ item.title }}</h4>
+              <span class="menu-price">€{{ item.price }}</span>
+            </div>
+
+   {% if item.description %}
+              <p class="menu-desc muted">{{ item.description }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
+</section>
+
 {% endblock %}
