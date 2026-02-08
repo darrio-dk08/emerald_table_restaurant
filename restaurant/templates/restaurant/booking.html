@@ -31,48 +31,80 @@
                 {{ form.name }}
                 {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
               </div>   
-              
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+                   <div class="col-12 col-md-6">
+                <label class="form-label fw-semibold">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors }}</div>{% endif %}
               </div>
 
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-semibold">Phone</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}<div class="text-danger small mt-1">{{ form.phone.errors }}</div>{% endif %}
               </div>
 
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-semibold">Guests</label>
+                {{ form.guests }}
+                {% if form.guests.errors %}<div class="text-danger small mt-1">{{ form.guests.errors }}</div>{% endif %}
               </div>
 
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-semibold">Date</label>
+                {{ form.date }}
+                {% if form.date.errors %}<div class="text-danger small mt-1">{{ form.date.errors }}</div>{% endif %}
               </div>
 
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-semibold">Time</label>
+                {{ form.time }}
+                {% if form.time.errors %}<div class="text-danger small mt-1">{{ form.time.errors }}</div>{% endif %}
               </div>
 
-               <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
-                {{ form.name }}
-                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              <div class="col-12 pt-2">
+                <button type="submit" class="btn btn-emerald btn-lg w-100">
+                  Book Now
+                </button>
+                <p class="text-muted small mt-3 mb-0 text-center">
+                  By booking, you agree to receive a confirmation message.
+                </p>
               </div>
+            </div>
+          </form>
 
-              
+    </div>
+      </div>
+    </div>
+
+     <!-- INFO SIDEBAR -->
+    <div class="col-12 col-lg-5">
+      <div class="card border-0 shadow-sm rounded-4 mb-4">
+        <div class="card-body p-4">
+          <h2 class="h6 fw-bold text-uppercase letterspace-1 emerald mb-2">Reservation Info</h2>
+          <p class="text-muted mb-3">
+            For parties larger than 8, special requests, or private dining, please contact us directly.
+          </p>
+
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex justify-content-between py-2 border-top">
+              <span class="text-muted">Lunch</span><span class="fw-semibold">12:00 – 15:00</span>
+            </li>
+            <li class="d-flex justify-content-between py-2 border-top">
+              <span class="text-muted">Dinner</span><span class="fw-semibold">17:00 – 22:00</span>
+            </li>
+            <li class="d-flex justify-content-between py-2 border-top">
+              <span class="text-muted">Phone</span><span class="fw-semibold">+353 123 4567</span>
+            </li>
+            <li class="d-flex justify-content-between py-2 border-top border-bottom">
+              <span class="text-muted">Email</span><span class="fw-semibold">reservations@emeraldtable.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+ 
+    </div>
+  </div>
+</div>
+
 {% endblock %}
