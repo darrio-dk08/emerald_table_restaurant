@@ -1,10 +1,78 @@
 {% extends 'restaurant/base.html' %}
 {% block content %}
 
-<h2>Book a Table</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Book Now</button>
-</form>
+<div class="container my-4" style="max-width: 1120px;">
+  <!-- HERO -->
+  <div class="p-4 p-md-5 rounded-4 hero-emerald mb-4">
+    <h1 class="display-6 fw-bold mb-2">Book a Table</h1>
+    <p class="mb-0 text-muted">
+      Reserve your table in seconds. We’ll confirm your booking as soon as possible.
+    </p>
+  </div>
+
+   <div class="row g-4 align-items-start">
+    <!-- FORM CARD -->
+    <div class="col-12 col-lg-7">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4 p-md-5">
+
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+              {{ form.non_field_errors }}
+            </div>
+          {% endif %}
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+ <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>   
+              
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+               <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label fw-semibold">Name</label>
+                {{ form.name }}
+                {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
+              </div>
+
+              
 {% endblock %}
