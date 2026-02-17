@@ -1,5 +1,7 @@
 # Bugs Fixed
 
+Return to [README.md](README.md)
+
 While building and deploying this project, I ran into a few issues and fixed them during development.
 
 Static files not loading on Heroku (CSS + images)
