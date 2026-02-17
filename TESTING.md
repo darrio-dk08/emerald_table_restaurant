@@ -8,28 +8,28 @@ Minor bugs fixed
 
 Used [HTML W3C Validator](https://validator.w3.org/nu/#textarea) to test HTML file, code was pasted from web page view source
 
-![alt text](<Screenshot 2026-02-08 171323.png>)
+![alt text](static/images/Html.png)
 
 - fixed bug
 
-![alt text](<Screenshot 2026-02-08 172310.png>)
+![alt text](static/images/Html-fixed.png)
 
 ## CSS
 
 Used [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator) pass with no errors 
 
-![alt text](<Screenshot 2026-02-08 173809.png>)
+![alt text](static/images/css-valid.png)
 
 ## JavaScript
 
 Used [JShint Validator](https://jshint.com/)
 
 
-![alt text](<Screenshot 2026-02-08 175318.png>)
+![alt text](static/images/JShint-valid.png)
 
 ### Bug fixed after replacing *const* to *var*
 
-![alt text](<Screenshot 2026-02-08 174807.png>)
+![alt text](static/images/JShint-valid-fix.png)
 
 
 ## Python
@@ -40,59 +40,59 @@ Used [PEP8 CI Python Linter](https://pep8ci.herokuapp.com/) (**autopep8** docume
 
 - asgi.py 
 
-![alt text](<Screenshot 2026-02-08 180531.png>)
+![alt text](static/images/Python-Linter.png)
 
 - settings.py
 
-![alt text](<Screenshot 2026-02-08 181927.png>)
+![alt text](static/images/Python-Linter1.png)
 
 - urls.py
 
-![alt text](<Screenshot 2026-02-08 182136.png>)
+![alt text](static/images/Python-urls.png)
 
 - wsgi.py
 
-![alt text](<Screenshot 2026-02-08 182354.png>)
+![alt text](static/images/Python-wsgi.png)
 
 
 ### Validation for Restaurant App 
 
 - 0001_initial.py
 
-![alt text](<Screenshot 2026-02-08 183353.png>)
+![alt text](static/images/Python-initial.png)
 
 - admin.py
 
-![alt text](<Screenshot 2026-02-08 183529.png>)
+![alt text](static/images/Python-admin.png)
 
 - apps.py
 
-![alt text](<Screenshot 2026-02-08 183616.png>)
+![alt text](static/images/Python-apps.png)
 
 - forms.py
 
-![alt text](<Screenshot 2026-02-08 184408.png>)
+![alt text](static/images/Python-forms.png)
 
 - models.py
 
-![alt text](<Screenshot 2026-02-08 185135.png>)
+![alt text](static/images/Python-models.png)
 
 - views.py
 
-![alt text](<Screenshot 2026-02-08 185309.png>)
+![alt text](static/images/Python-views.png)
 
 - manage.py
 
-![alt text](<Screenshot 2026-02-08 185451.png>)
+![alt text](static/images/Python-manage.png)
 
 
 ## Lighthouse 
 
 - desktop 
 
-![alt text](<Screenshot 2026-02-08 203930.png>)
+![alt text](<static/images/lighthouse desktop.png>)
 
 
 - mobile 
 
-![alt text](<Screenshot 2026-02-08 204314.png>)
+![alt text](<static/images/lighthouse mobile.png>)
