@@ -1,22 +1,21 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}" />
     <title>Emerald Table Restaurant</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-     <script src="https://kit.fontawesome.com/d43dd49180.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://kit.fontawesome.com/d43dd49180.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-
     <header class="site-header">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background:#0f5f3a;">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background: #0f5f3a">
             <div class="container-fluid">
                 <a class="navbar-brand fw-bold" href="{% url 'home' %}">Emerald Table Restaurant</a>
 
@@ -29,29 +28,45 @@
                 <!-- Links -->
                 <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Menu</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'booking' %}">Book a Table</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'booking' %}">Book a Table</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <main class="site-main">
-        {% block content %}{% endblock %}
-    </main>
+    <main class="site-main">{% block content %}{% endblock %}</main>
     <footer class="site-footer">
-        <p>Follow us:
-            <a href="https://facebook.com" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i></a> |
-            <a href="https://instagram.com" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a> |
-            <a href="https://x.com" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a> |
-            <a href="https://youtube.com" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
-        </p>
-    </footer>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <div class="footer-social">
+            <span class="footer-social__label">Follow us:</span>
 
+            <a class="social-icon" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a class="social-icon" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a class="social-icon" href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a class="social-icon" href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
 </html>

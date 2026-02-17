@@ -35,17 +35,57 @@ body {
     background: #0f5f3a;
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 18px 12px;
 }
 
-.site-footer a {
-    color: white;
-    margin: 0 5px;
+/* Container inside footer */
+.footer-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* "Follow us:" text */
+.footer-social__label {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+/* Social icon buttons */
+.social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: #0f5f3a;
     text-decoration: none;
+
+    transition: 0.25s ease;
 }
 
-.site-footer a:hover {
-    text-decoration: underline;
+/* Icon size */
+.social-icon i {
+    font-size: 18px;
+}
+
+/* Hover effect */
+.social-icon:hover {
+    transform: translateY(-3px);
+    background: #d5cabd; /* gold */
+    color: #0f5f3a;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Keyboard accessibility */
+.social-icon:focus-visible {
+    outline: 3px solid #ffd166;
+    outline-offset: 3px;
 }
 
 /* HOME INTRO SECTION */
@@ -268,7 +308,7 @@ body {
 }
 .btn-emerald:hover{
   filter: brightness(0.95);
-  color: #fff;
+  color: #14FA95;
 }
 
 .map-card{
