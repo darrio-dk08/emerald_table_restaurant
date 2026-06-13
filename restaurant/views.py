@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 
 from .forms import BookingForm
 from .models import MenuItem
+from .models import Booking
 
 
 def home(request):
@@ -88,3 +89,12 @@ def booking(request):
 
 def booking_success(request):
     return render(request, "restaurant/booking_success.html")
+
+def booking_list(request):
+    bookings = Booking.objects.all().order_by("-created_at")
+
+    return render(
+        request,
+        "restaurant/booking_list.html",
+        {"bookings": bookings}
+    )
