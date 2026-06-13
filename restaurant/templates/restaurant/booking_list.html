@@ -1,0 +1,33 @@
+{% extends "restaurant/base.html" %}
+
+{% block content %}
+
+<h1>All Bookings</h1>
+
+{% for booking in bookings %}
+
+<div>
+
+    <h3>{{ booking.name }}</h3>
+
+    <p>Email: {{ booking.email }}</p>
+
+    <p>Phone: {{ booking.phone }}</p>
+
+    <p>Guests: {{ booking.guests }}</p>
+
+    <p>Date: {{ booking.date }}</p>
+
+    <p>Time: {{ booking.time }}</p>
+
+</div>
+
+<hr>
+
+{% empty %}
+
+<p>No bookings found.</p>
+
+{% endfor %}
+
+{% endblock %}
