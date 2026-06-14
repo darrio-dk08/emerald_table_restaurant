@@ -20,6 +20,10 @@
 
     <p>Time: {{ booking.time }}</p>
 
+    <a href="{% url 'edit_booking' booking.id %}">
+        Edit Booking
+    </a>
+
 </div>
 
 <hr>

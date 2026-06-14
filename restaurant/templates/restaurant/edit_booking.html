@@ -1,0 +1,23 @@
+{% extends "restaurant/base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Edit Booking</h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">
+            Update Booking
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}
