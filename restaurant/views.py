@@ -132,3 +132,20 @@ def edit_booking(request, booking_id):
         "restaurant/edit_booking.html",
         {"form": form}
     )
+
+def delete_booking(request, booking_id):
+
+    booking = get_object_or_404(
+        Booking,
+        id=booking_id
+    )
+
+    if request.method == "POST":
+        booking.delete()
+        return redirect("booking_list")
+
+    return render(
+        request,
+        "restaurant/delete_booking.html",
+        {"booking": booking}
+    )
