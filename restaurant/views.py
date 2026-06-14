@@ -1,10 +1,7 @@
-from collections import OrderedDict
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import BookingForm
-from .models import MenuItem
-from .models import Booking
-from django.shortcuts import render, redirect, get_object_or_404
+from .models import Booking, MenuItem
 
 
 def home(request):
@@ -24,7 +21,6 @@ def menu(request):
         "Menu": "Seasonal favourites, prepared fresh daily.",
     }
 
-    # Your desired order
     category_order = ["Starters", "Mains", "Pasta", "Desserts", "Drinks"]
 
     grouped = {}
@@ -41,18 +37,19 @@ def menu(request):
             category = "Menu"
             title = raw
 
-        entry = {"title": title,
-                 "description": item.description, "price": item.price}
+        entry = {
+            "title": title,
+            "description": item.description,
+            "price": item.price,
+        }
 
         if category in category_order:
             grouped.setdefault(category, []).append(entry)
         else:
             unknown_categories.setdefault(category, []).append(entry)
 
-    # Build ordered sections
     sections = []
 
-    # First: ordered categories
     for cat in category_order:
         if cat in grouped:
             sections.append(
@@ -63,7 +60,6 @@ def menu(request):
                 }
             )
 
-    # Then: any unknown categories at the bottom
     for cat, items_list in unknown_categories.items():
         sections.append(
             {
@@ -91,54 +87,38 @@ def booking(request):
 def booking_success(request):
     return render(request, "restaurant/booking_success.html")
 
+
 def booking_list(request):
     bookings = Booking.objects.all().order_by("-created_at")
 
     return render(
         request,
         "restaurant/booking_list.html",
-        {"bookings": bookings}
+        {"bookings": bookings},
     )
+
 
 def edit_booking(request, booking_id):
-
-    booking = get_object_or_404(
-        Booking,
-        id=booking_id
-    )
+    booking = get_object_or_404(Booking, id=booking_id)
 
     if request.method == "POST":
-
-        form = BookingForm(
-            request.POST,
-            instance=booking
-        )
+        form = BookingForm(request.POST, instance=booking)
 
         if form.is_valid():
             form.save()
-
-            return redirect(
-                "booking_list"
-            )
-
+            return redirect("booking_list")
     else:
-
-        form = BookingForm(
-            instance=booking
-        )
+        form = BookingForm(instance=booking)
 
     return render(
         request,
         "restaurant/edit_booking.html",
-        {"form": form}
+        {"form": form},
     )
+
 
 def delete_booking(request, booking_id):
-
-    booking = get_object_or_404(
-        Booking,
-        id=booking_id
-    )
+    booking = get_object_or_404(Booking, id=booking_id)
 
     if request.method == "POST":
         booking.delete()
@@ -147,5 +127,5 @@ def delete_booking(request, booking_id):
     return render(
         request,
         "restaurant/delete_booking.html",
-        {"booking": booking}
+        {"booking": booking},
     )
