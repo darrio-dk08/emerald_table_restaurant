@@ -27,3 +27,34 @@ Testing documentation has been expanded to include:
 
 
 ![text](static/images/edit_booking.png) ![text](static/images/delete_booking.png) ![text](static/images/all_bookings.png)
+
+## Code Improvements
+
+Following assessment feedback, several improvements were made to the codebase.
+
+### Views.py
+
+* Removed unused imports.
+* Removed duplicate imports.
+* Improved code formatting and readability.
+* Added correct spacing between functions.
+
+### URLs.py
+
+* Reformatted URL patterns for better readability.
+* Improved code structure and consistency.
+* Resolved validation warnings.
+
+### Validation
+
+All Python files were reviewed and updated to follow PEP 8 guidelines.
+
+Issues fixed included:
+
+* Unused imports.
+* Duplicate imports.
+* Missing blank lines.
+* Long lines.
+* Missing newline at end of file.
+
+
