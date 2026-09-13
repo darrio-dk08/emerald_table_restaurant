@@ -154,11 +154,22 @@ def edit_booking(request, booking_id):
     )
 
     if request.method == "POST" and form.is_valid():
-        form.save()
-        messages.success(request, "Booking updated.")
+        if form.has_changed():
+            form.save()
+            messages.success(request, "Booking updated.")
+        else:
+            messages.info(
+                request,
+                "No changes were made to your booking.",
+            )
+
         return redirect("booking_list")
 
-    return render(request, "restaurant/edit_booking.html", {"form": form})
+    return render(
+        request,
+        "restaurant/edit_booking.html",
+        {"form": form},
+    )
 
 
 @login_required

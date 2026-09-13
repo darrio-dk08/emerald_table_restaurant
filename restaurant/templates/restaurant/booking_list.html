@@ -1,43 +1,39 @@
 {% extends "restaurant/base.html" %}
 
 {% block content %}
+<div class="container my-4">
+    <h1>My Bookings</h1>
 
-<h1>All Bookings</h1>
+    <p>
+        <a class="btn btn-success" href="{% url 'booking' %}">
+            Book another table
+        </a>
+    </p>
 
-{% for booking in bookings %}
+    {% for booking in bookings %}
+    <article class="card mb-3">
+        <div class="card-body">
+            <h2 class="h5">{{ booking.name }}</h2>
 
-<div>
+            <p>Email: {{ booking.email }}</p>
+            <p>Phone: {{ booking.phone }}</p>
+            <p>Guests: {{ booking.guests }}</p>
+            <p>Date: {{ booking.date|date:"d M Y" }}</p>
+            <p>Time: {{ booking.time|time:"H:i" }}</p>
 
-    <h3>{{ booking.name }}</h3>
+            <a class="btn btn-outline-success"
+                href="{% url 'edit_booking' booking.id %}">
+                Edit Booking
+            </a>
 
-    <p>Email: {{ booking.email }}</p>
-
-    <p>Phone: {{ booking.phone }}</p>
-
-    <p>Guests: {{ booking.guests }}</p>
-
-    <p>Date: {{ booking.date }}</p>
-
-    <p>Time: {{ booking.time }}</p>
-
-    <a href="{% url 'edit_booking' booking.id %}">
-        Edit Booking
-    </a>
-
-    <br>
-
-    <a href="{% url 'delete_booking' booking.id %}">
-    Delete Booking
-</a>
-
+            <a class="btn btn-outline-danger"
+                href="{% url 'delete_booking' booking.id %}">
+                Delete Booking
+            </a>
+        </div>
+    </article>
+    {% empty %}
+    <p>No bookings found.</p>
+    {% endfor %}
 </div>
-
-<hr>
-
-{% empty %}
-
-<p>No bookings found.</p>
-
-{% endfor %}
-
 {% endblock %}
