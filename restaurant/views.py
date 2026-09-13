@@ -1,13 +1,19 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_http_methods, require_safe
 
 from .forms import BookingForm
 from .models import Booking, MenuItem
 
 
+@require_safe
 def home(request):
     return render(request, "restaurant/index.html")
 
 
+@require_safe
 def menu(request):
     items = MenuItem.objects.all().order_by("name")
 
@@ -32,6 +38,10 @@ def menu(request):
         if " - " in raw:
             category, title = raw.split(" - ", 1)
             category = category.strip()
+
+            if category == "Starter":
+                category = "Starters"
+
             title = title.strip()
         else:
             category = "Menu"
@@ -72,24 +82,55 @@ def menu(request):
     return render(request, "restaurant/menu.html", {"menu_sections": sections})
 
 
+@require_http_methods(["GET", "POST"])
+def signup(request):
+    if request.user.is_authenticated:
+        return redirect("booking_list")
+
+    form = UserCreationForm(
+        request.POST if request.method == "POST" else None
+    )
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Account created. Please log in.")
+        return redirect("login")
+
+    return render(request, "registration/signup.html", {"form": form})
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
 def booking(request):
-    if request.method == "POST":
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("booking_success")
-    else:
-        form = BookingForm()
+    instance = Booking(owner=request.user)
+
+    form = BookingForm(
+        request.POST if request.method == "POST" else None,
+        instance=instance,
+    )
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Booking created.")
+        return redirect("booking_success")
 
     return render(request, "restaurant/booking.html", {"form": form})
 
 
+@login_required
+@require_safe
 def booking_success(request):
     return render(request, "restaurant/booking_success.html")
 
 
+@login_required
+@require_safe
 def booking_list(request):
-    bookings = Booking.objects.all().order_by("-created_at")
+    bookings = Booking.objects.filter(owner=request.user).order_by(
+        "date",
+        "time",
+        "pk",
+    )
 
     return render(
         request,
@@ -98,34 +139,44 @@ def booking_list(request):
     )
 
 
+@login_required
+@require_http_methods(["GET", "POST"])
 def edit_booking(request, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id)
-
-    if request.method == "POST":
-        form = BookingForm(request.POST, instance=booking)
-
-        if form.is_valid():
-            form.save()
-            return redirect("booking_list")
-    else:
-        form = BookingForm(instance=booking)
-
-    return render(
-        request,
-        "restaurant/edit_booking.html",
-        {"form": form},
+    instance = get_object_or_404(
+        Booking,
+        pk=booking_id,
+        owner=request.user,
     )
 
+    form = BookingForm(
+        request.POST if request.method == "POST" else None,
+        instance=instance,
+    )
 
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Booking updated.")
+        return redirect("booking_list")
+
+    return render(request, "restaurant/edit_booking.html", {"form": form})
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
 def delete_booking(request, booking_id):
-    booking = get_object_or_404(Booking, id=booking_id)
+    instance = get_object_or_404(
+        Booking,
+        pk=booking_id,
+        owner=request.user,
+    )
 
     if request.method == "POST":
-        booking.delete()
+        instance.delete()
+        messages.success(request, "Booking deleted.")
         return redirect("booking_list")
 
     return render(
         request,
         "restaurant/delete_booking.html",
-        {"booking": booking},
+        {"booking": instance},
     )
