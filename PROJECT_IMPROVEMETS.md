@@ -1,60 +1,83 @@
-Following assessor feedback, the application was updated to address the identified issues:
+# Assessment Repair Notes
 
-## CRUD Functionality
+This document records the current repair status. It does not guarantee
+an assessment pass.
 
-The booking system now supports full CRUD operations:
+## Booking Functionality
 
-- Create new bookings
-- View existing bookings
-- Edit existing bookings
-- Delete existing bookings
+Local browser checks have exercised booking creation, listing, editing
+and deletion.
 
-This allows users to fully manage booking records through the frontend without requiring access to the Django admin panel.
+- Booking routes require authentication.
+- Ordinary users can access only their own bookings.
+- Requests for another user's booking return 404.
+- Deletion requires a confirmation POST.
+- Unchanged edits display an informational message.
+- Online bookings are limited to 1–8 guests.
+- Server-side validation rejects past dates and invalid booking times.
 
-## Security Improvements
+See [TESTING.md](TESTING.md) for the scope and results of these checks.
 
-The Django SECRET_KEY has been removed from the repository and is now stored securely using environment variables through a .env file. The .env file has been added to .gitignore to prevent sensitive information from being committed to version control.
+## Authentication and Automated Testing
 
-## Testing Documentation
+The three locally executed test modules contain 21 passing tests:
 
-Testing documentation has been expanded to include:
+- `restaurant/test_booking_security.py`: 10 tests.
+- `restaurant/test_accounts_and_times.py`: 8 tests.
+- `restaurant/test_page_links.py`: 3 tests.
 
-- Manual feature testing
-- CRUD functionality testing
-- Form validation testing
-- Expected and actual test results
-- Supporting screenshots as evidence
+Coverage includes account registration, login, logout, booking ownership,
+CSRF protection, guest limits, date and time boundaries, selected internal
+links, static asset discovery and booking labels.
 
+Passing these tests does not verify every assessment criterion or the
+production deployment.
 
-![text](static/images/edit_booking.png) ![text](static/images/delete_booking.png) ![text](static/images/all_bookings.png)
+## Database Design
 
-## Code Improvements
+See [ERD.md](ERD.md) for the models, fields and relationships.
 
-Following assessment feedback, several improvements were made to the codebase.
+The booking owner relationship is nullable to preserve legacy records.
+Legacy records without an owner are excluded from ordinary users'
+booking lists. Deleting a user with related bookings is protected.
 
-### Views.py
+Restaurant migrations 0001, 0002 and 0003 have been applied locally.
+Production migration status remains unverified.
 
-* Removed unused imports.
-* Removed duplicate imports.
-* Improved code formatting and readability.
-* Added correct spacing between functions.
+## Security Remediation Status
 
-### URLs.py
+The current tracked files no longer include `.env`, the local SQLite
+database or Python cache files. Ignore rules help prevent these files
+from being added again accidentally.
 
-* Reformatted URL patterns for better readability.
-* Improved code structure and consistency.
-* Resolved validation warnings.
+Earlier Git commits still contain sensitive material. Removing a file
+from tracking does not remove it from Git history.
 
-### Validation
+Secret rotation, repository-history cleanup and verification of the
+affected remote repositories remain outstanding.
 
-All Python files were reviewed and updated to follow PEP 8 guidelines.
+## Interface and Documentation Repairs
 
-Issues fixed included:
+- Added account navigation and POST logout.
+- Added booking feedback and an unchanged-edit message.
+- Associated booking labels with their form inputs.
+- Clarified guest limits and available booking times.
+- Improved the homepage heading and responsive map styling.
+- Removed an unused navigation script.
+- Added the ERD and linked it from the README.
+- Documented verified tests separately from pending checks.
 
-* Unused imports.
-* Duplicate imports.
-* Missing blank lines.
-* Long lines.
-* Missing newline at end of file.
+Historical screenshots may show earlier versions. They must not be
+treated as evidence of the repaired interface without comparison.
 
+## Remaining Verification
 
+- Production settings, database, migrations and static assets.
+- Deployed commit identity and live booking behaviour.
+- Secret rotation and sensitive Git-history remediation.
+- Complete HTML, CSS and Python validation.
+- Remaining accessibility and responsive-layout checks.
+- External links and restaurant contact information.
+- Updated screenshots and final assessor-criterion review.
+
+A complete PEP 8 review and an overall assessment pass are not claimed.
