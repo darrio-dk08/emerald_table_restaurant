@@ -6,7 +6,31 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                {{ field }}
+
+                {% if field.help_text %}
+                    <div class="form-text" id="{{ field.auto_id }}_helptext">
+                        {{ field.help_text|safe }}
+                    </div>
+                {% endif %}
+
+                {% if field.errors %}
+                    <div id="{{ field.auto_id }}_error" role="alert">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
 
         <button class="btn btn-success" type="submit">
             Create account
