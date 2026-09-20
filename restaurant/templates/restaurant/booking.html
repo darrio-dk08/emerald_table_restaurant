@@ -6,7 +6,7 @@
   <div class="p-4 p-md-5 rounded-4 hero-emerald mb-4">
     <h1 class="display-6 fw-bold mb-2">Book a Table</h1>
     <p class="mb-0 text-muted">
-      Reserve your table in seconds. We’ll confirm your booking as soon as possible.
+      Book for 1–8 guests. Your booking is saved immediately and can be managed in My Bookings.
     </p>
   </div>
 
@@ -27,36 +27,36 @@
 
  <div class="row g-3">
               <div class="col-12">
-                <label class="form-label fw-semibold">Name</label>
+                <label class="form-label fw-semibold" for="{{ form.name.id_for_label }}">Name</label>
                 {{ form.name }}
                 {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors }}</div>{% endif %}
               </div>   
                    <div class="col-12 col-md-6">
-                <label class="form-label fw-semibold">Email</label>
+                <label class="form-label fw-semibold" for="{{ form.email.id_for_label }}">Email</label>
                 {{ form.email }}
                 {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors }}</div>{% endif %}
               </div>
 
               <div class="col-12 col-md-6">
-                <label class="form-label fw-semibold">Phone</label>
+                <label class="form-label fw-semibold" for="{{ form.phone.id_for_label }}">Phone</label>
                 {{ form.phone }}
                 {% if form.phone.errors %}<div class="text-danger small mt-1">{{ form.phone.errors }}</div>{% endif %}
               </div>
 
               <div class="col-12 col-md-4">
-                <label class="form-label fw-semibold">Guests</label>
+                <label class="form-label fw-semibold" for="{{ form.guests.id_for_label }}">Guests</label>
                 {{ form.guests }}
                 {% if form.guests.errors %}<div class="text-danger small mt-1">{{ form.guests.errors }}</div>{% endif %}
               </div>
 
               <div class="col-12 col-md-4">
-                <label class="form-label fw-semibold">Date</label>
+                <label class="form-label fw-semibold" for="{{ form.date.id_for_label }}">Date</label>
                 {{ form.date }}
                 {% if form.date.errors %}<div class="text-danger small mt-1">{{ form.date.errors }}</div>{% endif %}
               </div>
 
               <div class="col-12 col-md-4">
-                <label class="form-label fw-semibold">Time</label>
+                <label class="form-label fw-semibold" for="{{ form.time.id_for_label }}">Time</label>
                 {{ form.time }}
                 {% if form.time.errors %}<div class="text-danger small mt-1">{{ form.time.errors }}</div>{% endif %}
               </div>
@@ -66,7 +66,8 @@
                   Book Now
                 </button>
                 <p class="text-muted small mt-3 mb-0 text-center">
-                  By booking, you agree to receive a confirmation message.
+                  Choose a future date and time in 15-minute intervals.
+Available booking times are 12:00–14:45 and 17:00–21:45.
                 </p>
               </div>
             </div>

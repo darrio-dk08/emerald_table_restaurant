@@ -1,13 +1,16 @@
 {% extends "restaurant/base.html" %}
 
 {% block content %}
-
-<div class="container">
-
+<div class="container my-4">
     <h1>Edit Booking</h1>
 
-    <form method="post">
+    <p>
+        Online bookings allow 1–8 guests.
+        Choose a future date and a 15-minute slot:
+        12:00–14:45 or 17:00–21:45.
+    </p>
 
+    <form method="post">
         {% csrf_token %}
 
         {{ form.as_p }}
@@ -16,8 +19,9 @@
             Update Booking
         </button>
 
+        <a href="{% url 'booking_list' %}" class="btn btn-secondary">
+            Cancel
+        </a>
     </form>
-
 </div>
-
 {% endblock %}
