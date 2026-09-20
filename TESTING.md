@@ -173,6 +173,78 @@ page and submitted to the validator.
 
 ![Local menu HTML validation result](static/testing_screenshots/menu-html-validation.png)
 
+## Live HTML Validation
+
+The deployed Heroku pages were checked using the
+[W3C Nu HTML Checker](https://validator.w3.org/nu/).
+
+These results record live-page checks reported during testing.
+Earlier local validation results are documented separately.
+
+| Page | Result |
+|---|---|
+| Homepage | PASS — no errors or warnings reported |
+| Menu | PASS — no errors or warnings reported |
+| Login | PASS — no errors or warnings reported |
+| Signup before repair | FAIL — four HTML errors |
+| Signup after repair | PASS — no errors or warnings reported |
+
+### Live Homepage HTML Validation
+
+Page checked: `/`
+
+![Live homepage HTML validation](static/testing_screenshots/live-homepage-html-validation.png)
+
+### Live Menu HTML Validation
+
+Page checked: `/menu/`
+
+![Live menu HTML validation](static/testing_screenshots/live-menu-html-validation.png)
+
+### Live Login HTML Validation
+
+Page checked: `/accounts/login/`
+
+![Live login HTML validation](static/testing_screenshots/live-login-html-validation.png)
+
+### Live Signup HTML Validation — Initial Failure
+
+Page checked: `/accounts/signup/`
+
+The initial check reported four errors:
+
+1. End tag `p` implied, but there were open elements.
+2. Unclosed element `span`.
+3. Stray end tag `span`.
+4. No `p` element in scope but a `p` end tag was seen.
+
+The signup template used `{{ form.as_p }}`, which placed the
+password-help list inside paragraph/span markup that produced
+invalid HTML nesting.
+
+![Live signup HTML validation before repair](static/testing_screenshots/live-signup-html-before-fix.png)
+
+### Live Signup HTML Validation — After Repair
+
+**File repaired:** `restaurant/templates/registration/signup.html`.
+
+The template now renders individual fields inside div containers.
+Labels, password guidance, field errors, non-field errors and CSRF
+protection are retained.
+
+The corrected page passed local validation. The subsequent live
+retest was reported as having no errors or warnings.
+
+![Live signup HTML validation after repair](static/testing_screenshots/live-signup-html-after-fix.png)
+
+### Validation Scope
+
+These results cover the homepage, menu, login and signup pages.
+They do not establish full accessibility or functional correctness.
+
+Authenticated booking pages and form-validation error states
+require separate HTML checks.
+
 ## Historical validation evidence
 
 The screenshots and notes below relate to earlier project versions.
