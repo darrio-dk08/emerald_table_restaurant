@@ -2,7 +2,6 @@
 {% block content %}
 
 <div class="container my-4" style="max-width: 1120px;">
-  <!-- HERO -->
   <div class="p-4 p-md-5 rounded-4 hero-emerald mb-4 text-center">
     <h1 class="display-5 fw-bold mb-2">Our Menu</h1>
     <p class="lead mb-0 text-muted">
@@ -10,16 +9,15 @@
     </p>
   </div>
 
-  <!-- TWO-COLUMN SECTIONS -->
   <div class="row g-4 align-items-start">
     {% for section in menu_sections %}
       <div class="col-12 col-lg-6">
         <div class="card border-0 shadow-sm rounded-4 h-100">
           <div class="card-body p-4">
             <div class="d-flex align-items-center gap-3 mb-2">
-              <h3 class="h6 fw-bold text-uppercase letterspace-1 emerald mb-0">
+              <h2 class="h6 fw-bold text-uppercase letterspace-1 emerald mb-0">
                 {{ section.title }}
-              </h3>
+              </h2>
               <div class="flex-grow-1 section-rule"></div>
             </div>
 
@@ -37,15 +35,23 @@
                         <div class="small text-muted mt-1">{{ item.description }}</div>
                       {% endif %}
                     </div>
-
-                    <span class="price-pill">€{{ item.price }}</span>
+                    <span class="price-pill">&euro;{{ item.price|floatformat:2 }}</span>
                   </div>
                 </div>
+              {% empty %}
+                <p class="text-muted mb-0">
+                  No dishes are currently listed in this section.
+                </p>
               {% endfor %}
             </div>
-
           </div>
         </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="text-muted">
+          Our menu is being updated. Please check back soon.
+        </p>
       </div>
     {% endfor %}
   </div>
