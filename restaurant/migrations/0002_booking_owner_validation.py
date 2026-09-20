@@ -17,16 +17,38 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='booking',
             name='owner',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='bookings', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='bookings',
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
             model_name='booking',
             name='guests',
-            field=models.IntegerField(validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(20)]),
+            field=models.IntegerField(
+                validators=[
+                    django.core.validators.MinValueValidator(1),
+                    django.core.validators.MaxValueValidator(20),
+                ],
+            ),
         ),
         migrations.AlterField(
             model_name='booking',
             name='phone',
-            field=models.CharField(max_length=20, validators=[django.core.validators.RegexValidator(message='Use digits, spaces, +, () or - for your phone number.', regex='^\\+?[0-9 ()-]{7,20}$')]),
+            field=models.CharField(
+                max_length=20,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        message=(
+                            'Use digits, spaces, +, () or - '
+                            'for your phone number.'
+                        ),
+                        regex='^\\+?[0-9 ()-]{7,20}$',
+                    ),
+                ],
+            ),
         ),
     ]
