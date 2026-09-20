@@ -159,6 +159,20 @@ Other pages and the deployed website require separate validation.
 
 ![Homepage HTML validation result](static/testing_screenshots/homepage-html-validation.png)
 
+### Menu HTML validation — repaired version
+
+**Environment:** Local development.
+**Page:** http://127.0.0.1:8000/menu/
+**Tool:** W3C Nu HTML Checker.
+
+The rendered page source was copied from the browser's View Source
+page and submitted to the validator.
+
+**Result:** No errors or warnings reported.
+**Live deployment verification:** Pending.
+
+![Local menu HTML validation result](static/testing_screenshots/menu-html-validation.png)
+
 ## Historical validation evidence
 
 The screenshots and notes below relate to earlier project versions.
