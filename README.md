@@ -269,6 +269,8 @@ interface.
 
 ## Testing
 
+See the [homepage HTML validation evidence](TESTING.md#homepage-html-validation--repaired-version).
+
 See [TESTING.md](TESTING.md) for test coverage, manual results,
 historical evidence and checks that remain pending.
 

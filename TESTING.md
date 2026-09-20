@@ -146,6 +146,19 @@ viewport where relevant, action, expected result and actual result.
 Use synthetic account and booking data. Do not include passwords, .env
 contents, database credentials or real customers' personal details.
 
+### Homepage HTML validation — repaired version
+
+The rendered HTML from the logged-out local homepage
+(`http://127.0.0.1:8000/`) was copied from the browser's
+View Source page and checked using the W3C Nu HTML Checker.
+
+**Result:** No HTML errors reported.
+
+**Scope:** This result covers the submitted homepage HTML only.
+Other pages and the deployed website require separate validation.
+
+![Homepage HTML validation result](static/testing_screenshots/homepage-html-validation.png)
+
 ## Historical validation evidence
 
 The screenshots and notes below relate to earlier project versions.
