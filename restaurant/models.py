@@ -42,7 +42,7 @@ class Booking(models.Model):
         ],
     )
     guests = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(20)],
+        validators=[MinValueValidator(1), MaxValueValidator(8)],
     )
     date = models.DateField()
     time = models.TimeField()

@@ -30,7 +30,7 @@ class BookingForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                     "min": 1,
-                    "max": 20,
+                    "max": 8,
                 }
             ),
             "date": forms.DateInput(
