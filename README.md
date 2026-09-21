@@ -7,7 +7,12 @@
 
 A responsive restaurant website built with Django, featuring a homepage, menu display, account registration and an online booking system. Signed-in users can create, view, edit and delete their own bookings. Server-side validation checks guest numbers, booking dates and booking times.
 
-The repaired application has been tested locally. Production deployment, exposed-secret remediation and the remaining assessment checks are still being verified. The live website may not yet contain the latest local repairs.
+The repaired application has passed the documented local automated
+tests and live manual checks. Heroku release v26 deployed commit
+23311993, matching GitHub revision 2331199 at verification.
+Subsequent documentation-only commits may have newer identifiers.
+
+See TESTING.md for results, evidence and explicitly recorded limitations.
 
 **Live Link:** [Emerald Table Restaurant](https://emerald-table-restaurant-8293c189fc58.herokuapp.com/)
 
@@ -44,7 +49,7 @@ rules and handling of legacy bookings.
 
 - Frontend: HTML, CSS, Bootstrap 5
 
-- Database: SQLite (development)
+- Database: SQLite for local development; PostgreSQL on Heroku for production
 
 - Deployment: Heroku
 
@@ -82,7 +87,8 @@ The palette is based around:
 
 The homepage introduces visitors to **Emerald Table Restaurant** with a modern hero section, strong branding, and a welcoming atmosphere. Users can quickly understand the restaurant’s concept and navigate to the menu or booking pages.
 
-To improve the customer experience, the homepage also includes an embedded **Google Maps location**, allowing visitors to easily find the restaurant and plan their visit.
+The homepage includes an embedded Google Map to demonstrate location
+integration for this fictional portfolio restaurant.
 
 
 ![alt text](static/images/home-top.png)
@@ -136,8 +142,6 @@ git clone https://github.com/darrio-dk08/emerald_table_restaurant.git
 cd emerald_table_restaurant
 ```
 
-Local repair commits may not yet be available on the remote repository
-while security remediation and deployment checks are outstanding.
 
 ### 2. Create and activate a virtual environment
 
@@ -278,7 +282,7 @@ interface.
 See the [homepage HTML validation evidence](TESTING.md#homepage-html-validation--repaired-version).
 
 See [TESTING.md](TESTING.md) for test coverage, manual results,
-historical evidence and checks that remain pending.
+historical evidence and recorded testing limitations.
 
 Run the three verified automated test modules:
 
@@ -297,41 +301,81 @@ all accessibility requirements or Git history are secure.
 
 ## Deployment Status and Requirements
 
-Heroku is the intended production platform. The live URL alone does
-not establish which commit is deployed or whether it contains the
-latest repairs.
+The application is deployed on Heroku using PostgreSQL, Gunicorn
+and WhiteNoise.
 
-Production verification remains pending. Before deployment:
+### Deployment configuration
 
-- Back up existing production data and confirm the database in use.
-- Rotate exposed secrets and complete the Git-history remediation.
-- Confirm the Python runtime and pinned dependencies are compatible.
-- Verify the Gunicorn process configuration.
-- Configure `SECRET_KEY` with a new production-only secret.
-- Set `DEBUG=False`.
-- Set `ALLOWED_HOSTS` to the exact deployed hostname, without a URL scheme.
-- Configure a persistent PostgreSQL database through `DATABASE_URL`.
-- Apply all migrations to the production database.
-- Verify static file collection and WhiteNoise asset serving.
-- Run Django's deployment checks against production configuration.
-- Verify HTTPS, authentication, ownership restrictions and CRUD on the live site.
-- Record the deployed commit and compare it with the assessed source.
+- `.python-version` specifies Python 3.13.
+- `requirements.txt` contains the pinned application dependencies.
+- Production requires a strong, private `SECRET_KEY`.
+- `DEBUG=False`.
+- `ALLOWED_HOSTS` contains the exact deployed hostname.
+- `DATABASE_URL` supplies the PostgreSQL connection.
+- `DISABLE_COLLECTSTATIC` is absent so static collection can run.
+- Static-file storage uses Django's `STORAGES` configuration.
 
-The repaired settings read configuration from environment variables.
-Static storage uses Django's `STORAGES` setting.
+The Procfile contains:
 
-Do not use the development SQLite database as the production database.
-Do not mark deployment checks as passed until their results have been
-recorded.
+```text
+release: python manage.py migrate --noinput
+web: gunicorn emerald_table_restaurant.wsgi:application
+```
+
+### Deploying an update
+
+1. Run the relevant local checks and tests.
+2. Commit and push the changes to GitHub.
+3. In the Heroku application's Deploy tab, select the connected
+   repository's `main` branch and choose Deploy Branch.
+4. Confirm the build and release succeed.
+5. Compare the deployed revision with the intended GitHub commit.
+6. Check the affected functionality on the live website.
+
+Automatic deployments were disabled during the repair process.
+
+### Recorded production verification
+
+- PostgreSQL was confirmed as the production database.
+- Restaurant migrations 0001, 0002 and 0003 were applied.
+- Fifteen menu items and five legacy bookings were restored;
+  restored fields matched the exported fixtures.
+- A new customer booking remained present after refreshing.
+- Documented registration, login and booking CRUD checks passed.
+- Observed homepage resource requests returned HTTP 200 or 304.
+- HTTP redirected to HTTPS.
+- The HTTPS homepage returned HSTS, nosniff and DENY headers.
+- A login POST without a CSRF token returned HTTP 403.
+- Heroku v26 deployed 23311993, matching GitHub 2331199 at verification.
+- The homepage and menu loaded after that deployment.
+
+Django's production deployment check reported no errors and two
+warnings: security.W005 and security.W021. HSTS was enabled, while
+includeSubDomains and preload remained disabled. These warnings
+were reviewed and retained.
+
+See TESTING.md for the scope and limitations of each check.
 
 ## Security Status
 
-`.env`, the local SQLite database and Python cache files have been
-removed from the current tracked files and added to ignore rules.
+The local and Heroku SECRET_KEY values were replaced.
 
-This does not remove their contents from earlier commits. Secret
-rotation and Git-history cleanup remain outstanding.
+The personal GitHub repository's history was rewritten to remove
+.env, db.sqlite3 and Python cache files, and replace the identified
+historical secret. A scan of the cleaned reachable Git objects found
+no occurrences of that identified secret. The cleaned history was
+pushed to the personal repository.
 
+This does not establish removal from separate repositories, forks,
+cached copies or private backups. The separate Code Institute
+submission copy has not been confirmed cleaned.
+
+Live cross-account edit/delete page requests returned 404.
+Local automated ownership tests passed. Direct cross-account POST
+requests were not manually tested on the live deployment.
+
+Environment files, database credentials and private backup exports
+must remain outside version control.
 ## Bugs and Repair Notes
 
 See [bugs.md](bugs.md) for the bug log and

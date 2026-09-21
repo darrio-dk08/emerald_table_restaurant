@@ -2,8 +2,11 @@
 
 ## Current repair verification
 
-The results below describe local testing of the repaired application.
-They do not establish that the repaired version is deployed on Heroku.
+This document records local automated tests and manual checks on the
+repaired Heroku deployment. Each section identifies its testing scope.
+
+Heroku release v26 deployed commit 23311993, matching GitHub revision
+2331199. The homepage and menu were checked successfully after deployment.
 
 ### Test environment
 
@@ -54,6 +57,9 @@ The tested working tree included the link-test file subsequently committed
 as `2fd58bc`. After the homepage changes, another run passed all 21 tests in
 8.819 seconds. Those homepage changes were subsequently committed as
 `a2614e7`.
+
+Those commit identifiers predate the security history rewrite and are
+retained only as historical testing references.
 
 Durations will vary. The important result is that every test passes.
 
@@ -124,17 +130,17 @@ They prevent access to that record and are not broken-link defects.
 
 | Check | Status |
 |---|---|
-| Current rendered HTML validation | PARTIAL — live homepage, menu, login and repaired signup passed as reported; authenticated booking pages and form-error states remain pending |
+| Current rendered HTML validation | PASS for documented scope — listed public and authenticated pages, empty/populated booking lists and representative form-error states passed after repairs |
 | Current custom CSS validation | PASS — uploaded local style.css reported no errors; see evidence below |
-| Full keyboard navigation and accessibility review | PENDING |
-| Responsive checks at recorded mobile, tablet and desktop widths | PENDING |
-| External map, social and CDN links | PENDING |
-| Correctness of displayed business location and contact details | PENDING |
-| Production static-file delivery | PARTIAL — live menu styling confirmed visually; complete asset-response checks remain pending |
+| Full keyboard navigation and accessibility review | PARTIAL — documented navigation, login, booking-form and mobile-menu keyboard checks passed; a full accessibility audit was not performed |
+| Responsive checks at recorded mobile, tablet and desktop widths | PASS for tested scope — Home, Menu and Book a Table checked at 375 × 900, 768 × 900 and 1280 × 900 using browser emulation |
+| External map, social and CDN links | PASS for observed scope — map and social destinations opened; observed homepage resource requests returned 200 or 304 |
+| Correctness of displayed business location and contact details | CONFIRMED AS DEMONSTRATION CONTENT — fictional portfolio business; map and contact details do not represent real reservation services |
+| Production static-file delivery | PASS for homepage scope — observed requests returned 200 or 304 with no failures reported |
 | Live PostgreSQL connection, migrations and persistence | PASS for tested scope — PostgreSQL confirmed, restaurant migrations applied, 15 menu items and five legacy bookings restored with matching fields; a new live booking persisted after refresh |
 | Actual exposed-key rotation and remote Git-history cleanup | PARTIAL — local and Heroku keys replaced; identified secret and sensitive paths removed from personal repository history and pushed; separate submission repository and cached copies remain unresolved |
-| Deployed commit matches the final GitHub revision | PARTIAL — release v23 matched fc57dc2; final revision comparison must be repeated after subsequent changes |
-| Repeat customer and security workflows on the repaired live site | PARTIAL — registration, login, CRUD, unchanged-edit feedback, foreign-user page restrictions and login CSRF rejection passed; live invalid submissions were rejected, but browser-independent validation and forged ownership POST checks remain pending |
+| Deployed commit matches the final GitHub revision | PASS at deployment verification — Heroku v26 deployed 23311993, matching GitHub 2331199; later documentation-only changes may have a newer revision |
+| Repeat customer and security workflows on the repaired live site | PASS for documented checks — registration, login, CRUD, unchanged-edit feedback, cross-account page restrictions and login CSRF rejection; nine guests rejected with browser validation disabled. Direct cross-account POST testing on the live site was skipped |
 | Production HTTPS and response headers | PASS for tested scope — HTTP redirects to HTTPS; homepage returns 200 with HSTS, nosniff and DENY headers |
 | Django production deployment check | COMPLETED WITH WARNINGS — no errors; security.W005 and security.W021 reviewed and retained |
 | Python code validation | PASS — Flake8 reported no issues across the checked project Python files |
@@ -171,7 +177,7 @@ The rendered page source was copied from the browser's View Source
 page and submitted to the validator.
 
 **Result:** No errors or warnings reported.
-**Live deployment verification:** Pending.
+**Live deployment verification:** Completed separately; see Live Menu HTML Validation below.
 
 ![Local menu HTML validation result](static/testing_screenshots/menu-html-validation.png)
 
@@ -348,11 +354,16 @@ and repeating the mismatched-password submission.
 
 ### Validation Scope
 
-These results cover the homepage, menu, login and signup pages.
-They do not establish full accessibility or functional correctness.
+Validation covered the live homepage, menu, login and signup pages;
+the booking form; empty and populated booking lists; edit and deletion
+confirmation pages; and booking success.
 
-Authenticated booking pages and form-validation error states
-require separate HTML checks.
+Representative error states were checked for booking creation,
+editing, login and signup. All final checks reported no errors or
+warnings. Initial signup failures and successful retests are retained.
+
+HTML validation does not establish full accessibility or functional
+correctness.
 
 ## Current Custom CSS Validation
 
@@ -378,11 +389,13 @@ Tested on the deployed website using a keyboard.
 | Tab moves through controls in a logical order | PASS |
 | Enter on the Menu link opens the menu page | PASS |
 | Shift+Tab moves focus backwards | PASS |
+| Login fields and button show visible focus; login completed using Tab and Enter | PASS |
+| All booking fields and the submit button are reachable with visible keyboard focus; Shift+Tab moves backwards | PASS |
+| Mobile navigation at 375px: toggle has visible focus, Enter opens the menu, and Tab reaches its links | PASS |
 
 Scope: homepage/menu navigation, login by keyboard, booking-form
 focus and navigation, and the mobile menu at 375px. These checks
 do not constitute a full accessibility audit.
-
 | Login fields and button show visible focus; login completed using Tab and Enter | PASS |
 | All booking fields and the submit button are reachable with visible keyboard focus; Shift+Tab moves backwards | PASS |
 | Mobile navigation at 375px: toggle has visible focus, Enter opens the menu, and Tab reaches its links | PASS |
