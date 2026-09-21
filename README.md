@@ -11,6 +11,12 @@ The repaired application has been tested locally. Production deployment, exposed
 
 **Live Link:** [Emerald Table Restaurant](https://emerald-table-restaurant-8293c189fc58.herokuapp.com/)
 
+> **Portfolio project:** Emerald Table Restaurant is fictional.
+> Contact details are illustrative, and bookings are demonstrations,
+> not real reservations. The map is included to demonstrate location
+> integration. Social links lead to external platforms, not official
+> restaurant accounts.
+
 ## Database Design
 
 See the [Entity Relationship Diagram and schema explanation](ERD.md)

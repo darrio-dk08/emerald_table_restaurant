@@ -368,6 +368,77 @@ the stylesheet served by Heroku.
 
 ![Current custom CSS validation](static/testing_screenshots/current-custom-css-validation.png)
 
+## Live Keyboard Navigation Checks
+
+Tested on the deployed website using a keyboard.
+
+| Check | Result |
+|---|---|
+| Focused navigation links/buttons have a visible indicator | PASS |
+| Tab moves through controls in a logical order | PASS |
+| Enter on the Menu link opens the menu page | PASS |
+| Shift+Tab moves focus backwards | PASS |
+
+Scope: homepage/menu navigation, login by keyboard, booking-form
+focus and navigation, and the mobile menu at 375px. These checks
+do not constitute a full accessibility audit.
+
+| Login fields and button show visible focus; login completed using Tab and Enter | PASS |
+| All booking fields and the submit button are reachable with visible keyboard focus; Shift+Tab moves backwards | PASS |
+| Mobile navigation at 375px: toggle has visible focus, Enter opens the menu, and Tab reaches its links | PASS |
+
+## Live Responsive Layout Checks
+
+Tested using browser device emulation on the deployed website.
+
+| Viewport | Pages checked | Result |
+|---|---|---|
+| 375 × 900 | Home, Menu, Book a Table | PASS |
+| 768 × 900 | Home, Menu, Book a Table | PASS |
+| 1280 × 900 | Home, Menu, Book a Table | PASS |
+
+No horizontal overflow, overlapping content or clipped controls was
+observed. The homepage map fitted its container, and navigation
+remained usable.
+
+## Live External Links and Business Details
+
+| Check | Result |
+|---|---|
+| Google Maps link opens the intended demonstration location | PASS |
+| Footer social links open their destinations | PASS |
+| Business details identified as fictional portfolio content | CONFIRMED |
+
+These checks verify link behaviour, not the existence of a real
+restaurant or ownership of the linked location and social platforms.
+
+## Live Homepage Asset Delivery
+
+**Method:** Inspected the browser Network panel while reloading
+the deployed homepage.
+
+**Result:** All observed requests returned HTTP 200 or 304.
+No failed requests were reported.
+
+**Scope:** Resources requested by the homepage in the tested browser.
+
+## Live Server-Side Guest Limit
+
+Browser validation was temporarily disabled by adding `novalidate`
+to the booking form in Developer Tools.
+
+With all other fields valid, a POST containing nine guests was submitted.
+The server returned: "Ensure this value is less than or equal to 8."
+No nine-person booking appeared in My Bookings.
+
+**Result:** PASS.
+
+### Live Ownership Testing Limitation
+
+Direct cross-account POST requests were not manually tested on the
+live deployment. Live cross-account edit/delete page requests returned
+404. Local automated ownership tests passed.
+
 ## Historical validation evidence
 
 The screenshots and notes below relate to earlier project versions.
