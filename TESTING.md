@@ -120,23 +120,25 @@ They prevent access to that record and are not broken-link defects.
 - Passing tests cover the cases asserted; they are not proof that every
   possible input or workflow is correct.
 
-### Checks still outstanding
+### Verification status
 
 | Check | Status |
 |---|---|
-| Current rendered HTML validation on all page types and error states | PENDING |
-| Current CSS validation | PENDING |
+| Current rendered HTML validation | PARTIAL — live homepage, menu, login and repaired signup passed as reported; authenticated booking pages and form-error states remain pending |
+| Current custom CSS validation | PASS — uploaded local style.css reported no errors; see evidence below |
 | Full keyboard navigation and accessibility review | PENDING |
 | Responsive checks at recorded mobile, tablet and desktop widths | PENDING |
 | External map, social and CDN links | PENDING |
 | Correctness of displayed business location and contact details | PENDING |
-| Production static-file delivery | PENDING |
-| Live PostgreSQL connection, migrations and persistence | PENDING |
-| Actual exposed-key rotation and remote Git-history cleanup | PENDING |
-| Deployed commit matches the final GitHub revision | PENDING |
-| Repeat customer and security workflows on the repaired live site | PENDING |
-
-Do not mark these checks PASS until they have been performed and recorded.
+| Production static-file delivery | PARTIAL — live menu styling confirmed visually; complete asset-response checks remain pending |
+| Live PostgreSQL connection, migrations and persistence | PASS for tested scope — PostgreSQL confirmed, restaurant migrations applied, 15 menu items and five legacy bookings restored with matching fields; a new live booking persisted after refresh |
+| Actual exposed-key rotation and remote Git-history cleanup | PARTIAL — local and Heroku keys replaced; identified secret and sensitive paths removed from personal repository history and pushed; separate submission repository and cached copies remain unresolved |
+| Deployed commit matches the final GitHub revision | PARTIAL — release v23 matched fc57dc2; final revision comparison must be repeated after subsequent changes |
+| Repeat customer and security workflows on the repaired live site | PARTIAL — registration, login, CRUD, unchanged-edit feedback, foreign-user page restrictions and login CSRF rejection passed; live invalid submissions were rejected, but browser-independent validation and forged ownership POST checks remain pending |
+| Production HTTPS and response headers | PASS for tested scope — HTTP redirects to HTTPS; homepage returns 200 with HSTS, nosniff and DENY headers |
+| Django production deployment check | COMPLETED WITH WARNINGS — no errors; security.W005 and security.W021 reviewed and retained |
+| Python code validation | PASS — Flake8 reported no issues across the checked project Python files |
+| Automated regression tests | PASS — all 21 tests passed locally after Python formatting repairs |
 
 ### Evidence to retain
 
@@ -244,6 +246,20 @@ They do not establish full accessibility or functional correctness.
 
 Authenticated booking pages and form-validation error states
 require separate HTML checks.
+
+## Current Custom CSS Validation
+
+The local file `static/css/style.css` was uploaded to the
+[W3C CSS Validator](https://jigsaw.w3.org/css-validator/).
+
+**Validation profile:** CSS level 3 + SVG.
+**Result:** No errors found.
+
+This validates the submitted custom stylesheet. It does not cover
+Bootstrap, establish full accessibility, or independently verify
+the stylesheet served by Heroku.
+
+![Current custom CSS validation](static/testing_screenshots/current-custom-css-validation.png)
 
 ## Historical validation evidence
 
