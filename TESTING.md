@@ -239,6 +239,113 @@ retest was reported as having no errors or warnings.
 
 ![Live signup HTML validation after repair](static/testing_screenshots/live-signup-html-after-fix.png)
 
+### Live Booking Form HTML Validation
+
+**Page:** `/booking/`.
+**State:** Signed-in customer, empty form before submission.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+This result covers the initial form only, not its validation-error state.
+
+![Live booking form HTML validation](static/testing_screenshots/live-booking-form-html-validation.png)
+
+### Live My Bookings HTML Validation — Empty List
+
+**Page:** `/bookings/`.
+**State:** Signed-in customer with no bookings.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live empty booking list HTML validation](static/testing_screenshots/live-my-bookings-html-validation.png)
+
+### Live My Bookings HTML Validation — Populated List
+
+**Page:** `/bookings/`.
+**State:** Signed-in customer with a test booking displayed.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live populated booking list HTML validation](static/testing_screenshots/live-my-bookings-populated-html-validation.png)
+
+### Live Edit Booking HTML Validation
+
+**Page:** `/booking/edit/<id>/`.
+**State:** Signed-in owner viewing a pre-filled booking form before submission.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live edit booking HTML validation](static/testing_screenshots/live-edit-booking-html-validation.png)
+
+### Live Delete Booking HTML Validation
+
+**Page:** `/booking/delete/<id>/`.
+**State:** Signed-in owner viewing the deletion confirmation page.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live delete booking HTML validation](static/testing_screenshots/live-delete-booking-html-validation.png)
+
+### Live Booking Success HTML Validation
+
+**Page:** `/booking/success/`.
+**State:** Signed-in customer viewing the confirmation page.
+**Method:** Rendered page source submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live booking success HTML validation](static/testing_screenshots/live-booking-success-html-validation.png)
+
+### Live Booking Form HTML Validation — Error State
+
+**Page:** `/booking/`.
+**State:** Form redisplayed after submitting 16:00 for a future date.
+**Method:** POST response copied from browser DevTools Network and
+submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live booking error HTML validation](static/testing_screenshots/live-booking-error-html-validation.png)
+
+### Live Edit Booking HTML Validation — Error State
+
+**Page:** `/booking/edit/<id>/`.
+**State:** Form redisplayed after submitting the invalid time 16:00.
+**Method:** POST response copied from browser DevTools Network and
+submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live edit booking error HTML validation](static/testing_screenshots/live-edit-booking-error-html-validation.png)
+
+### Live Login HTML Validation — Error State
+
+**Page:** `/accounts/login/`.
+**State:** Form redisplayed after submitting incorrect credentials.
+**Method:** POST response copied from browser DevTools Network and
+submitted to the W3C Nu HTML Checker.
+**Result:** No errors or warnings reported.
+
+![Live login error HTML validation](static/testing_screenshots/live-login-error-html-validation.png)
+
+### Live Signup HTML Validation — Error State
+
+**Page:** `/accounts/signup/`.
+**State:** Form redisplayed after submitting mismatched passwords.
+**Method:** POST response copied from browser DevTools Network and
+submitted to the W3C Nu HTML Checker.
+
+**Initial result:** FAIL — duplicate `id_password2_error`, with one
+error and one warning. The wrapper and Django-generated error list
+both used the same ID.
+
+**Fix:** Removed the ID from the wrapper while retaining `role="alert"`
+and Django's generated error list.
+
+**Retest result:** PASS — no errors or warnings after deploying the fix
+and repeating the mismatched-password submission.
+
+![Signup error state before fix](static/testing_screenshots/live-signup-error-before-fix-html-validation.png)
+
+![Signup error state after fix](static/testing_screenshots/live-signup-error-after-fix-html-validation.png)
+
 ### Validation Scope
 
 These results cover the homepage, menu, login and signup pages.
